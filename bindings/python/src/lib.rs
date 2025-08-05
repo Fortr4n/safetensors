@@ -78,6 +78,8 @@ fn prepare(tensor_dict: HashMap<String, PyBound<PyDict>>) -> PyResult<HashMap<St
             "float16" => Dtype::F16,
             "float32" => Dtype::F32,
             "float64" => Dtype::F64,
+            "float128" => Dtype::F128,
+            "float256" => Dtype::F256,
             "bfloat16" => Dtype::BF16,
             "float8_e4m3fn" => Dtype::F8_E4M3,
             "float8_e5m2" => Dtype::F8_E5M2,
@@ -1209,6 +1211,8 @@ fn create_tensor<'a>(
 fn get_pydtype(module: &PyBound<'_, PyModule>, dtype: Dtype, is_numpy: bool) -> PyResult<PyObject> {
     Python::with_gil(|py| {
         let dtype: PyObject = match dtype {
+            Dtype::F256 => module.getattr(intern!(py, "float256"))?.into(),
+            Dtype::F128 => module.getattr(intern!(py, "float128"))?.into(),
             Dtype::F64 => module.getattr(intern!(py, "float64"))?.into(),
             Dtype::F32 => module.getattr(intern!(py, "float32"))?.into(),
             Dtype::BF16 => {

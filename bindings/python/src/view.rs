@@ -87,6 +87,8 @@ pub fn prepare(tensor_dict: HashMap<String, PyBound<PyDict>>) -> PyResult<HashMa
             "float16" => Dtype::F16,
             "float32" => Dtype::F32,
             "float64" => Dtype::F64,
+            "float128" => Dtype::F128,
+            "float256" => Dtype::F256,
             "bfloat16" => Dtype::BF16,
             "float8_e4m3fn" => Dtype::F8_E4M3,
             "float8_e5m2" => Dtype::F8_E5M2,

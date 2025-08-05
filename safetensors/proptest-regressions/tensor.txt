@@ -1,0 +1,7 @@
+# Seeds for failure cases proptest has generated in the past. It is
+# automatically read and these particular cases re-run before any
+# novel cases are generated.
+#
+# It is recommended to check this file in to source control so that
+# everyone who runs the test benefits from these saved cases.
+cc 15f5c943bd9375660a43c95c90db541a2929057e1953e08a6493848012098054 # shrinks to metadata = Metadata { metadata: None, tensors: [TensorInfo { dtype: BOOL, shape: [1], data_offsets: (0, 1) }, TensorInfo { dtype: BOOL, shape: [1, 1], data_offsets: (1, 2) }, TensorInfo { dtype: I16, shape: [5, 1, 2], data_offsets: (2, 22) }, TensorInfo { dtype: F128, shape: [1, 1, 3, 6, 3], data_offsets: (22, 886) }, TensorInfo { dtype: BOOL, shape: [2], data_offsets: (886, 888) }, TensorInfo { dtype: BOOL, shape: [1, 3, 2, 2], data_offsets: (888, 900) }], index_map: {"t.3": 3, "t.4": 4, "t.0": 0, "t.1": 1, "t.5": 5, "t.2": 2} }
