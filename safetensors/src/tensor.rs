@@ -1544,4 +1544,43 @@ mod tests {
         assert_eq!(Dtype::F128.to_string(), "F128");
         assert_eq!(Dtype::F256.to_string(), "F256");
     }
+
+    #[test]
+    fn test_fp128_fp256_serialization() {
+        // Test FP128 with actual data
+        let fp128_data: Vec<u8> = vec![0u8; 32]; // 2 elements * 16 bytes each
+        let fp128_shape = vec![2];
+        
+        let fp128_tensor = TensorView::new(Dtype::F128, fp128_shape, &fp128_data).unwrap();
+        let mut tensors: HashMap<String, TensorView> = HashMap::new();
+        tensors.insert("fp128_test".to_string(), fp128_tensor);
+        
+        // Test serialization
+        let serialized = serialize(&tensors, None).unwrap();
+        assert!(serialized.len() > 0);
+        
+        // Test deserialization
+        let deserialized = SafeTensors::deserialize(&serialized).unwrap();
+        let tensor = deserialized.tensor("fp128_test").unwrap();
+        assert_eq!(tensor.dtype(), Dtype::F128);
+        assert_eq!(tensor.shape(), &[2]);
+        
+        // Test FP256 with actual data
+        let fp256_data: Vec<u8> = vec![0u8; 64]; // 2 elements * 32 bytes each
+        let fp256_shape = vec![2];
+        
+        let fp256_tensor = TensorView::new(Dtype::F256, fp256_shape, &fp256_data).unwrap();
+        let mut tensors: HashMap<String, TensorView> = HashMap::new();
+        tensors.insert("fp256_test".to_string(), fp256_tensor);
+        
+        // Test serialization
+        let serialized = serialize(&tensors, None).unwrap();
+        assert!(serialized.len() > 0);
+        
+        // Test deserialization
+        let deserialized = SafeTensors::deserialize(&serialized).unwrap();
+        let tensor = deserialized.tensor("fp256_test").unwrap();
+        assert_eq!(tensor.dtype(), Dtype::F256);
+        assert_eq!(tensor.shape(), &[2]);
+    }
 }
